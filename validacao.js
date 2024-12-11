@@ -3,13 +3,34 @@ import Joi from "joi";
 
 // Validação para inclusão de modelo carro
 export const modeloCarro = Joi.object({
-    nome: Joi.string() .min(3) .required(), // nome do carro, min. 3 caracteres
-    sigla: Joi.string() .length(3) .required(), // sigla do carro, min. 3 caracteres
-    potencia: Joi.number() .min(1) .required(), // potencia min. de 3 cv
-    velocidademaxima: Joi.number() .min(1) .required(), // velocidade min. de 1
-    consumo: Joi.number() .min(0.1) .required(), // consumo min. de 1
-    aceleracao: Joi.number() .min(0) .required(), // aceleração min. de 0
-    preco: Joi.number() .min(0) .required(), // preço min. de 0
+    nome: Joi.string() .min(3) .required() .messages({
+        'string.min' : 'O nome do carro de ter pelo menos 3 caracteres',
+        'any.required' : 'O nome do carro é Obrigatorio',
+    }), // nome do carro, min. 3 caracteres
+    sigla: Joi.string() .length(3) .required() .messages({ // sigla do carro, min. 3 caracteres
+        'string.length' : 'A sigla deve ter exatamente 3 caracteres',
+        'any.required' : 'A sigla é obrigatoria',
+    }), //sigla do carro, 3 caracter
+    potencia: Joi.number() .min(1) .required() .messages({ // potencia min. de 3 cv
+        'number.min' : 'A potencia deve ser maior ou igual a 1',
+        'any.required' : 'A potencia é obrigatorio'
+    }), //Potencia min. de 1 CV
+    velocidademaxima : Joi.number() .min(1) .required() .messages({ // velocidade min. de 1
+        'number.min' : 'A velocidade maxima deve ser maior ou igual a 1',
+        'any.required' : 'A velocidade máxima é obrigatória',
+    }), //Velocidade min. de 1
+    consumo : Joi.number() .min(0.1) .required() .messages({
+        'number.min' : 'O consumo deve ser maior ou igual a 0.1',
+        'any.required': 'O consumo é obrigatório'
+    }), // consumo min. de 1
+    aceleracao : Joi.number() .min(0) .required() .messages({
+        'number.min' : 'A aceleração deve ser maior ou igual a 0',
+        'any.required' : 'A aceleração é obrigatória',
+    }), // aceleração min. de 0
+    preco : Joi.number() .min(0) .required() .messages({
+        'number.min' : 'O preço deve ser maior ou igual a 1',
+        'any.required' : 'O preço é obrigatório',
+    }) // preço min. de 0
 });
 
 // validacao para atualizacao do carro
